@@ -1,0 +1,236 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.9.10 clang-1600.0.26.2)
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OrangeCloudIMClient -package-name orangecloudimclient
+import Combine
+import Foundation
+import Network
+import SignalRClient
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@available(*, deprecated, message: "旧版遗留常量，新接入请使用结构化消息类型 text/gift/systemNotice/custom")
+public struct IMMessageType {
+  public static let publicMsg: Swift.String
+  public static let sendGift: Swift.String
+  public static let sendBigGift: Swift.String
+  public static let sendBarrage: Swift.String
+  public static let aNotice: Swift.String
+  public static let stopLive: Swift.String
+}
+public struct CustomMessage : OrangeCloudIMClient.IMMessage, Swift.Equatable {
+  public let messageType: Swift.String
+  public let sequenceNumber: Swift.Int
+  public let serverTimestamp: Swift.Int
+  public let senderInfo: OrangeCloudIMClient.SenderInfo
+  public let groupId: Swift.String
+  public let customType: Swift.String
+  public let payload: [Swift.String : OrangeCloudIMClient.AnyCodable]
+  public init(sequenceNumber: Swift.Int, serverTimestamp: Swift.Int, senderInfo: OrangeCloudIMClient.SenderInfo, groupId: Swift.String, customType: Swift.String, payload: [Swift.String : OrangeCloudIMClient.AnyCodable] = [:])
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public static func == (a: OrangeCloudIMClient.CustomMessage, b: OrangeCloudIMClient.CustomMessage) -> Swift.Bool
+}
+public struct StateRestoredInfo : Swift.Codable, Swift.Equatable {
+  public let groupIds: [Swift.String]
+  public let backfilledCount: Swift.Int
+  public init(groupIds: [Swift.String], backfilledCount: Swift.Int)
+  public static func == (a: OrangeCloudIMClient.StateRestoredInfo, b: OrangeCloudIMClient.StateRestoredInfo) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ReconnectAttemptInfo : Swift.Equatable {
+  public let attemptNumber: Swift.Int
+  public let delayMs: Swift.Int
+  public init(attemptNumber: Swift.Int, delayMs: Swift.Int)
+  public static func == (a: OrangeCloudIMClient.ReconnectAttemptInfo, b: OrangeCloudIMClient.ReconnectAttemptInfo) -> Swift.Bool
+}
+public struct GiftInfo : Swift.Codable, Swift.Equatable {
+  public let giftId: Swift.String
+  public let giftName: Swift.String
+  public let giftCount: Swift.Int
+  public let giftPrice: Swift.Int
+  public let animationUrl: Swift.String
+  public init(giftId: Swift.String, giftName: Swift.String, giftCount: Swift.Int = 1, giftPrice: Swift.Int = 0, animationUrl: Swift.String = "")
+  public static func == (a: OrangeCloudIMClient.GiftInfo, b: OrangeCloudIMClient.GiftInfo) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct GiftMessage : OrangeCloudIMClient.IMMessage, Swift.Equatable {
+  public let messageType: Swift.String
+  public let sequenceNumber: Swift.Int
+  public let serverTimestamp: Swift.Int
+  public let senderInfo: OrangeCloudIMClient.SenderInfo
+  public let groupId: Swift.String
+  public let giftId: Swift.String
+  public let giftName: Swift.String
+  public let giftCount: Swift.Int
+  public let giftPrice: Swift.Int
+  public let animationUrl: Swift.String
+  public init(sequenceNumber: Swift.Int, serverTimestamp: Swift.Int, senderInfo: OrangeCloudIMClient.SenderInfo, groupId: Swift.String, giftId: Swift.String, giftName: Swift.String, giftCount: Swift.Int = 1, giftPrice: Swift.Int = 0, animationUrl: Swift.String = "")
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public static func == (a: OrangeCloudIMClient.GiftMessage, b: OrangeCloudIMClient.GiftMessage) -> Swift.Bool
+}
+public protocol IMMessage : Swift.Decodable, Swift.Encodable {
+  var messageType: Swift.String { get }
+  var sequenceNumber: Swift.Int { get }
+  var serverTimestamp: Swift.Int { get }
+  var senderInfo: OrangeCloudIMClient.SenderInfo { get }
+  var groupId: Swift.String { get }
+}
+public struct IMMessageBase : Swift.Codable, Swift.Equatable {
+  public let messageType: Swift.String
+  public let sequenceNumber: Swift.Int
+  public let serverTimestamp: Swift.Int
+  public let senderInfo: OrangeCloudIMClient.SenderInfo
+  public let groupId: Swift.String
+  public let data: [Swift.String : OrangeCloudIMClient.AnyCodable]?
+  public init(messageType: Swift.String, sequenceNumber: Swift.Int, serverTimestamp: Swift.Int, senderInfo: OrangeCloudIMClient.SenderInfo, groupId: Swift.String, data: [Swift.String : OrangeCloudIMClient.AnyCodable]? = nil)
+  public static func fromJsonString(_ json: Swift.String) -> OrangeCloudIMClient.IMMessageBase?
+  public func toJsonString() -> Swift.String?
+  public static func == (a: OrangeCloudIMClient.IMMessageBase, b: OrangeCloudIMClient.IMMessageBase) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AnyCodable : Swift.Codable, Swift.Equatable {
+  public let value: Any
+  public init(_ value: Any)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public static func == (lhs: OrangeCloudIMClient.AnyCodable, rhs: OrangeCloudIMClient.AnyCodable) -> Swift.Bool
+}
+public struct SenderInfo : Swift.Codable, Swift.Equatable {
+  public let userId: Swift.String
+  public let nickName: Swift.String
+  public let faceUrl: Swift.String
+  public let level: Swift.String
+  public let isAdmin: Swift.Bool
+  public let isAnchor: Swift.Bool
+  public init(userId: Swift.String, nickName: Swift.String, faceUrl: Swift.String = "", level: Swift.String = "0", isAdmin: Swift.Bool = false, isAnchor: Swift.Bool = false)
+  public static func == (a: OrangeCloudIMClient.SenderInfo, b: OrangeCloudIMClient.SenderInfo) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct SystemNotice : OrangeCloudIMClient.IMMessage, Swift.Equatable {
+  public let messageType: Swift.String
+  public let sequenceNumber: Swift.Int
+  public let serverTimestamp: Swift.Int
+  public let senderInfo: OrangeCloudIMClient.SenderInfo
+  public let groupId: Swift.String
+  public let noticeType: Swift.String
+  public let title: Swift.String
+  public let content: Swift.String
+  public init(sequenceNumber: Swift.Int, serverTimestamp: Swift.Int, senderInfo: OrangeCloudIMClient.SenderInfo, groupId: Swift.String, noticeType: Swift.String, title: Swift.String, content: Swift.String)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public static func == (a: OrangeCloudIMClient.SystemNotice, b: OrangeCloudIMClient.SystemNotice) -> Swift.Bool
+}
+public struct TextMessage : OrangeCloudIMClient.IMMessage, Swift.Equatable {
+  public let messageType: Swift.String
+  public let sequenceNumber: Swift.Int
+  public let serverTimestamp: Swift.Int
+  public let senderInfo: OrangeCloudIMClient.SenderInfo
+  public let groupId: Swift.String
+  public let content: Swift.String
+  public init(sequenceNumber: Swift.Int, serverTimestamp: Swift.Int, senderInfo: OrangeCloudIMClient.SenderInfo, groupId: Swift.String, content: Swift.String)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public static func == (a: OrangeCloudIMClient.TextMessage, b: OrangeCloudIMClient.TextMessage) -> Swift.Bool
+}
+public enum IMConnectionState : Swift.String {
+  case disconnected
+  case connecting
+  case connected
+  case reconnecting
+  case restoring
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol OCIMClientDelegate : AnyObject {
+  func didReceiveMessage(_ client: OrangeCloudIMClient.OCIMClient, messageJson: Swift.String)
+  func didUserJoin(_ client: OrangeCloudIMClient.OCIMClient, userInfoJson: Swift.String)
+  func didUserLeave(_ client: OrangeCloudIMClient.OCIMClient, userKey: Swift.String)
+  func didOnlineCountChange(_ client: OrangeCloudIMClient.OCIMClient, count: Swift.Int)
+  func didGetMuted(_ client: OrangeCloudIMClient.OCIMClient, muteInfoJson: Swift.String)
+  func didGetUnmuted(_ client: OrangeCloudIMClient.OCIMClient, userKey: Swift.String)
+  func didRoomClose(_ client: OrangeCloudIMClient.OCIMClient)
+  func didConnectionStateChange(_ client: OrangeCloudIMClient.OCIMClient, state: OrangeCloudIMClient.IMConnectionState)
+}
+extension OrangeCloudIMClient.OCIMClientDelegate {
+  public func didReceiveMessage(_ client: OrangeCloudIMClient.OCIMClient, messageJson: Swift.String)
+  public func didUserJoin(_ client: OrangeCloudIMClient.OCIMClient, userInfoJson: Swift.String)
+  public func didUserLeave(_ client: OrangeCloudIMClient.OCIMClient, userKey: Swift.String)
+  public func didOnlineCountChange(_ client: OrangeCloudIMClient.OCIMClient, count: Swift.Int)
+  public func didGetMuted(_ client: OrangeCloudIMClient.OCIMClient, muteInfoJson: Swift.String)
+  public func didGetUnmuted(_ client: OrangeCloudIMClient.OCIMClient, userKey: Swift.String)
+  public func didRoomClose(_ client: OrangeCloudIMClient.OCIMClient)
+  public func didConnectionStateChange(_ client: OrangeCloudIMClient.OCIMClient, state: OrangeCloudIMClient.IMConnectionState)
+}
+public class OCIMClient {
+  public static let version: Swift.String
+  weak public var delegate: (any OrangeCloudIMClient.OCIMClientDelegate)?
+  public var connectionState: OrangeCloudIMClient.IMConnectionState {
+    get
+  }
+  public var onConnectionStateChanged: Combine.AnyPublisher<OrangeCloudIMClient.IMConnectionState, Swift.Never> {
+    get
+  }
+  public var onTextMessage: Combine.AnyPublisher<OrangeCloudIMClient.TextMessage, Swift.Never> {
+    get
+  }
+  public var onGiftMessage: Combine.AnyPublisher<OrangeCloudIMClient.GiftMessage, Swift.Never> {
+    get
+  }
+  public var onSystemNotice: Combine.AnyPublisher<OrangeCloudIMClient.SystemNotice, Swift.Never> {
+    get
+  }
+  public var onCustomMessage: Combine.AnyPublisher<OrangeCloudIMClient.CustomMessage, Swift.Never> {
+    get
+  }
+  public var onBroadcastReceived: Combine.AnyPublisher<OrangeCloudIMClient.IMMessageBase, Swift.Never> {
+    get
+  }
+  public var onBatchMessageReceived: Combine.AnyPublisher<[OrangeCloudIMClient.IMMessageBase], Swift.Never> {
+    get
+  }
+  public var onStateRestored: Combine.AnyPublisher<OrangeCloudIMClient.StateRestoredInfo, Swift.Never> {
+    get
+  }
+  public var onGroupMemberList: Combine.AnyPublisher<Swift.String, Swift.Never> {
+    get
+  }
+  public var onReconnectAttempt: Combine.AnyPublisher<OrangeCloudIMClient.ReconnectAttemptInfo, Swift.Never> {
+    get
+  }
+  public var onReconnectFailed: Combine.AnyPublisher<Swift.Void, Swift.Never> {
+    get
+  }
+  public var maxReconnectAttempts: Swift.Int
+  public var heartbeatInterval: Swift.Double
+  public init()
+  @objc deinit
+  public func login(hubUrl: Swift.String, appId: Swift.String, userId: Swift.String, userSig: Swift.String)
+  public func logout()
+  public func joinGroup(_ groupId: Swift.String)
+  public func quitGroup(_ groupId: Swift.String)
+  public func sendGroupMsg(groupId: Swift.String, messageJson: Swift.String)
+  public func getGroupMemberList(_ groupId: Swift.String)
+  public func sendTextMessage(groupId: Swift.String, content: Swift.String)
+  public func sendGiftMessage(groupId: Swift.String, giftInfo: OrangeCloudIMClient.GiftInfo)
+  public func sendCustomMessage(groupId: Swift.String, customType: Swift.String, payload: [Swift.String : Any])
+  public func getLastSequenceNumber(groupId: Swift.String) -> Swift.Int
+}
+extension OrangeCloudIMClient.OCIMClient : SignalRClient.HubConnectionDelegate {
+  public func connectionDidOpen(hubConnection: SignalRClient.HubConnection)
+  public func connectionDidFailToOpen(error: any Swift.Error)
+  public func connectionDidClose(error: (any Swift.Error)?)
+  public func connectionWillReconnect(error: any Swift.Error)
+  public func connectionDidReconnect()
+}
+extension OrangeCloudIMClient.IMConnectionState : Swift.Equatable {}
+extension OrangeCloudIMClient.IMConnectionState : Swift.Hashable {}
+extension OrangeCloudIMClient.IMConnectionState : Swift.RawRepresentable {}

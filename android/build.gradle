@@ -23,6 +23,13 @@ rootProject.allprojects {
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
+// plugin 自带的本地 Maven 仓库（存放核心 AAR 二进制，核心逻辑闭源于此）
+repositories {
+    maven {
+        url = uri("${project.projectDir}/repo")
+    }
+}
+
 android {
     namespace = "com.orangecloud.im.flutter"
     compileSdk = 34
@@ -42,8 +49,7 @@ android {
 }
 
 dependencies {
-    // OrangeCloud IM Android 核心 SDK（AAR 二进制，核心逻辑闭源于此）
+    // OrangeCloud IM Android 核心 SDK（随 plugin 自带的本地 maven repo，核心逻辑闭源于 AAR）
+    // pom 已声明 signalr/coroutines/gson 传递依赖，宿主会自动拉取。
     implementation "com.orangecloud.im:orangecloud-im-client:2.0.0"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
-    implementation "com.google.code.gson:gson:2.10.1"
 }

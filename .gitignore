@@ -4,3 +4,4 @@
 .packages
 build/
 .DS_Store
+pubspec.lock
