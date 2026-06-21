@@ -1,0 +1,25 @@
+name: orangecloud_im_client
+description: OrangeCloud IM Client SDK for Flutter — 对原生 Android AAR / iOS XCFramework 的桥接插件（核心逻辑在原生二进制中，对标腾讯云 IM Flutter SDK）。
+version: 2.0.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^3.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.orangecloud.im.flutter
+        pluginClass: OrangecloudImClientPlugin
+      ios:
+        pluginClass: OrangecloudImClientPlugin
