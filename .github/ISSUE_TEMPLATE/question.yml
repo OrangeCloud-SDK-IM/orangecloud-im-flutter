@@ -1,0 +1,44 @@
+name: ❓ 用法 / 集成问题
+description: 接入时遇到的问题、API 怎么用、配置怎么填。**Bug 报告请走 Bug 模板，商务请邮件。**
+title: "[question] "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 在提交前
+        - 看 [README](https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter#readme) 完整过一遍（特别是「不支持」一节）
+        - 看 [example/](https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter/tree/main/example) 能不能直接套
+        - 看 [Releases](https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter/releases) 用的是最新版
+
+  - type: input
+    id: sdk_version
+    attributes:
+      label: SDK 版本
+      placeholder: "3.1.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: scenario
+    attributes:
+      label: 你想做什么
+      description: 一两句话讲清业务场景（例：直播间发红包、群成员列表、消息撤回）。
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: 已经试过什么
+      description: 看过的文档 / 试过的 API / 跑过的 demo。
+    validations:
+      required: true
+
+  - type: textarea
+    id: stuck
+    attributes:
+      label: 卡在哪
+      description: 报错 / 现象 / 期望。
+    validations:
+      required: true

@@ -2,8 +2,15 @@
 
 [![Platform](https://img.shields.io/badge/platform-Flutter-02569B?logo=flutter)](https://flutter.dev)
 [![Version](https://img.shields.io/badge/version-3.1.0-blue)](https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter/releases)
+[![License](https://img.shields.io/badge/license-Commercial-orange)](./LICENSE)
 
 OrangeCloud IM Flutter SDK，为直播、社交、协作场景提供即时通信能力。
+
+> **💼 商业授权 · 按月付费**
+> 本 SDK 拿到有效 License 才可商用。授权申请：[84248002@qq.com](mailto:84248002@qq.com)
+> 完整条款见 [LICENSE](./LICENSE)。
+
+**快速入口**：[Releases](../../releases) · [CHANGELOG](./CHANGELOG.md) · [example/ 最小可运行示例](./example) · [Report Issue](../../issues/new/choose) · [v2.x → v3.x 迁移文档](https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter/blob/main/CHANGELOG.md)
 
 > **v3.0.0 是破坏性重构：API 已完全对齐腾讯云 IM（V2TIM）。**
 > 从腾讯迁移只需三步：①全局替换 `V2TIM` / `V2Tim` → `V2OCIM`；②在 `initSDK` 之前插一行
@@ -11,7 +18,7 @@ OrangeCloud IM Flutter SDK，为直播、社交、协作场景提供即时通信
 > v2.x 的 `OrangeCloudIMClient` 与 `TextMessage` / `GiftMessage` / `SystemNotice` / `CustomMessage`
 > **已删除**，礼物等业务消息统一用 custom 消息承载。
 
-> **v3.1.0 改为纯 Dart 实现，公开 API 与 v3.1.0 之前逐字未变，升级无需改一行业务代码。**
+> **v3.1.0 改为纯 Dart 实现，公开 API 与 3.0.0 逐字未变，升级无需改一行业务代码。**
 
 ## 架构说明（v3.1.0 起）
 
@@ -50,6 +57,10 @@ dependencies:
       url: https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter.git
       ref: v3.1.0
 ```
+
+> 想直接看完整可跑代码？跳到 [example/](./example) — 包含最简接入 demo（覆盖
+> `setServerConfig` / `initSDK` / `login` / `joinGroup` / `sendGroupTextMessage` /
+> `notifyNetworkAvailable()`），改 4 个常量就能跑起来。
 
 ## 快速开始
 

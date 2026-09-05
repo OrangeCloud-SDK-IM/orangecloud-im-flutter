@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💼 商业授权 / 商务对接
+    url: mailto:84248002@qq.com
+    about: 申请 License / 谈合作 / 报价 — 走邮件，不开 issue
+  - name: 📖 集成文档（v3.x 四端契约）
+    url: https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter#readme
+    about: 安装、快速开始、API 清单、UserSig 算法都在 README
+  - name: 📝 CHANGELOG（变更历史）
+    url: https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter/blob/main/CHANGELOG.md
+    about: 看 v2.x → v3.0.0 → v3.1.0 改了什么、怎么迁移
+  - name: 🔧 example/（最小可运行 demo）
+    url: https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter/tree/main/example
+    about: clone 后改 4 个常量即可跑通

@@ -1,0 +1,47 @@
+name: 💡 功能请求
+description: 请求新功能或 API 扩展。**使用问题 / 集成咨询请走 Discussions 或邮件，不开 Feature Request。**
+title: "[feat] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 在提交前
+        - 看 [README](https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter#readme)「不支持」一节 —— 明确不支持的能力不会被接受
+        - 想清楚「四端一致」vs「仅 Flutter 端」—— 四端一致的需求排期会更长
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: 影响范围
+      description: 这个需求如果做，**是只 Flutter 端，还是需要四端都改？**
+      options:
+        - 仅 Flutter 端
+        - 四端（Web / iOS / Android / Flutter）都要做
+        - 不确定
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 背景 / 痛点
+      description: 什么场景下、什么业务催生了这个需求。越具体越好。
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 提议的 API 形状
+      description: 给出 Dart 伪代码 / 接口签名。参考 README 里 V2OCIM 的命名风格。
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternative
+    attributes:
+      label: 备选方案（如果做不了）
+      description: 实在做不了时，业务侧能否用现有 API 凑合？比如组合现有 listener。
+    validations:
+      required: false

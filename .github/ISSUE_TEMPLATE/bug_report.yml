@@ -1,0 +1,75 @@
+name: 🐛 Bug 报告
+description: 报告 SDK 行为不符合预期的问题。**功能咨询 / 用法问题请走 Discussions 或邮件，不要开 Bug issue。**
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 在提交前
+        - 确认你跑的是 [最新 release](https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter/releases) —— 旧版 bug 可能已修
+        - 看一眼 [CHANGELOG](https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter/blob/main/CHANGELOG.md) 是不是已知问题
+        - 仔细填写下面 5 项 — 信息不全的 issue 会被直接 close
+
+  - type: input
+    id: sdk_version
+    attributes:
+      label: SDK 版本
+      description: 跑 `flutter pub deps` 看 `orangecloud_im_client` 版本，或 `V2OCIMManager.instance.getVersion()`。
+      placeholder: "3.1.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 平台
+      options:
+        - Android
+        - iOS
+        - 两者都有
+    validations:
+      required: true
+
+  - type: input
+    id: flutter_version
+    attributes:
+      label: Flutter / Dart 版本
+      placeholder: "Flutter 3.24.x / Dart 3.5.x"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      description: 1. 2. 3. 尽量简短到能照着复现。
+      placeholder: |
+        1. 调用 im.login(userID: "u1", userSig: sig)
+        2. 主动断网 5 秒
+        3. 网络恢复，预期 10 秒内自动重连
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+      description: 包含报错信息、callback 的 `code` / `desc`、SDK log。
+    validations:
+      required: true
+
+  - type: textarea
+    id: server_info
+    attributes:
+      label: 服务端版本（已知即可）
+      description: 'OrangeCloud.SignalR commit / 部署时间，方便复现。填"未知"也行。'
+    validations:
+      required: false
