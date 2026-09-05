@@ -1,0 +1,26 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+  errors:
+    # SDK 是库，公开 API 不能用 print / debugPrint 之类的控制台输出
+    # （lib/ 下禁止 print，会在发布时通过 grep 复查）
+    invalid_annotation_target: ignore
+  exclude:
+    - .dart_tool/**
+    - build/**
+    - example/.dart_tool/**
+
+linter:
+  rules:
+    - prefer_const_constructors
+    - prefer_const_declarations
+    - prefer_final_locals
+    - avoid_print               # 库代码禁止 print
+    - require_trailing_commas
+    - unawaited_futures         # 漏 await 在 SDK 里就是 bug
+    - cancel_subscriptions     # Stream 订阅必须释放
+    - close_sinks              # StreamController 必须 close

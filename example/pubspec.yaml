@@ -1,0 +1,27 @@
+name: orangecloud_im_client_example
+description: Minimal runnable example for OrangeCloud IM Flutter SDK.
+publish_to: 'none'   # example app never published
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  orangecloud_im_client:
+    # 默认指向本地 SDK 包源码（与 example/ 同级的 lib/）。
+    # 如要测试 GitHub 发布的版本，改为：
+    #   git:
+    #     url: https://github.com/OrangeCloud-SDK-IM/orangecloud-im-flutter.git
+    #     ref: v3.1.0
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true

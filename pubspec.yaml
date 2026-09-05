@@ -1,0 +1,31 @@
+name: orangecloud_im_client
+description: OrangeCloud IM Client SDK for Flutter — 纯 Dart 实现（基于 SignalR），无原生依赖，API 完全对齐腾讯云 IM V2TIM。
+version: 3.1.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ASP.NET Core SignalR 的 Dart 客户端（传输层：negotiate / WebSocket 帧 / invoke 配对）。
+  # ⚠ 它只负责协议，不懂 groupId / sequenceNumber / 禁言 / 礼物 —— 这些在本 SDK 里实现。
+  #
+  # 选它的理由：四端本来每端都在用一个第三方 SignalR 客户端
+  # （Web `@microsoft/signalr`、Android `com.microsoft.signalr:signalr`、
+  # iOS 社区包 `SignalR-Client-Swift`），微软没出 Dart 客户端。
+  # 已排除：`signalr_flutter` / `fsignalr`（是 plugin，等于回到原生依赖）、
+  # `signalr_socket`（明确不兼容 ASP.NET Core SignalR）。
+  signalr_netcore: ^1.4.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^3.0.0
+
+# ⚠ v3.1.0 起**不再是 plugin**（原 flutter.plugin 段已删除）。
+# Dart 侧自己实现了全部 IM 逻辑，不需要 Android AAR / iOS XCFramework。
+# 原生二进制继续独立发布，服务 Android / iOS 原生接入方。
+flutter:

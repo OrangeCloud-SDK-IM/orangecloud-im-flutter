@@ -1,0 +1,40 @@
+# Dart / Flutter 工具链产物
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+
+# 构建产物
+build/
+
+# SDK 是库，不锁依赖（接入方自己 pub get 时会生成）
+pubspec.lock
+
+# 平台文件
+.DS_Store
+Thumbs.db
+*.iml
+.idea/
+.vscode/
+
+# 凭据 / 本地配置（绝不入库）
+*.env
+*.env.*
+local.properties
+key.properties
+*.jks
+*.keystore
+android/key.properties
+ios/Runner/GoogleService-Info.plist
+
+# 测试覆盖
+coverage/
+
+# example/ 自身工具链产物
+example/.dart_tool/
+example/build/
+example/.flutter-plugins
+example/.flutter-plugins-dependencies
+example/pubspec.lock
+example/.idea/
+example/.vscode/
